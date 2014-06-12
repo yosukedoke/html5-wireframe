@@ -63,7 +63,7 @@
         actions[name] = func;
       },
       doAction: function (key) {
-        var action = actions[key];
+        var action = actions[key||'default'];
 
         if (!action || typeof(action) !== 'function') return;
 
