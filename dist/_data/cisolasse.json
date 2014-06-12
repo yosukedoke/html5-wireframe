@@ -1,0 +1,13 @@
+{
+  "keywords": {
+    "type":"group",
+    "cisolasse": {
+      "hoge" : {
+        "ja": "やっほー"
+      },
+      "foo": {
+        "ja": "やったー"
+      }
+    }
+  }
+}

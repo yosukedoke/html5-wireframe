@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<title>Wireframe</title>
+
+<link rel="stylesheet" href="css/wireframe.css">
+<body>
+
+<div class="outline-screen" id="top">
+  <article>
+    <section data-parcial="_partials/sample.html"></section>
+
+    <section data-parcial="_partials/sample.ejs">
+      <data>{"list": ["hoge", "foo", "bar"]}</data>
+    </section>
+
+    <h2><span data-variable-name="keywords.hoge">Hoge</span></h2>
+    <p><span data-variable-name="keywords.foo">FOO</span></p>
+  </article>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/vender/ejs.js"></script>
+<script src="js/partial.js"></script>
+<script src="js/cisolasse.js"></script>
+<script src="js/wireframe.js"></script>
+<script src="js/example.js"></script>
+</body>
+</html>

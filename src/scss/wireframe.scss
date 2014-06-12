@@ -1,0 +1,349 @@
+@import 'compass';
+
+$color-section: #f90;
+$color-article: #c00033;
+$color-aside: #39f;
+$color-nav: #393;
+$color-headlines: #fc6;
+
+$color-anchor: #85c;
+
+$margin-global: 5px 3px;
+
+@include global-reset;
+
+head {
+  display: block;
+}
+title {
+  display: block;
+  padding:5px;
+  background:#333;
+  color:#FFF;
+  font-style:italic;
+  font-weight:bold;
+}
+body {
+  background: #ccc;
+  line-height: 1.6;
+  font-family: 'メイリオ' sans-serif;
+  font-size: 13px;
+
+  .outline-screen {
+    @include box-sizing(border-box);
+    height: 100%;
+    padding:$margin-global;
+    background: white;
+  }
+
+  width: 320px;
+
+  &.pc .outline-screen {
+    width: 960px;
+  }
+  &.tablet .outline-screen {
+    width: 786px;
+  }
+
+}
+
+@mixin use-tooltip {
+  position: relative;
+
+  &:after {
+    letter-spacing: 0.7px;
+    content: attr(data-name);
+    display: block;
+    line-height: 1;
+    padding: 1px 2px;
+    font-size: 5px;
+    color: #FFF;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+article,
+nav,
+aside,
+section,
+h1, h2, h3, h4, h5, h6 {
+  border: 2px solid $color-section;
+  margin: $margin-global;
+  padding: $margin-global;
+  @include use-tooltip;
+}
+
+article {
+  border-color: $color-article;
+
+  &:after {
+    background: $color-article;
+  }
+
+  ul.tags li {
+    background: #669;
+    color: #FFF;
+    padding: 1px 2px;
+    font-size: 6px;
+
+    &.category {
+      background: #966;
+    }
+  }
+
+  time {
+    font-size:10px;
+  }
+}
+
+section {
+  border-color: $color-section;
+
+  &:after {
+    background: $color-section;
+  }
+}
+
+aside {
+  border-color: $color-aside;
+
+  &:after {
+    background: $color-aside;
+  }
+}
+nav {
+  border-color: $color-nav;
+
+  &:after {
+    background: $color-nav;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  background: scale-lightness($color-headlines, 94);
+  border-left-width: 5px;
+  border-color: $color-headlines;
+
+  &:after {
+    background: $color-headlines;
+  }
+}
+
+a {
+  display: block;
+  border: 1px dashed $color-anchor;
+  border-radius: 5px;
+  margin: $margin-global;
+  padding: $margin-global;
+  color: shade($color-anchor, 30);
+  background: scale-lightness($color-anchor, 92);
+
+  text-decoration: underline;
+
+  @include use-tooltip;
+
+  &:after {
+    background: $color-anchor;
+    content: "a: " attr(href);
+  }
+  &:hover {
+    color: shade($color-anchor, 60);
+    background: scale-lightness($color-anchor, 98);
+    border-color: scale-lightness($color-anchor, 40);
+  }
+}
+
+/***
+* Styling
+***/
+
+ul > li > ul,
+ul > li > ol,
+ol > li > ol,
+ol > li > ul {
+  margin-left: 15px;
+}
+
+article {
+  ul li {
+    list-style: disc;
+    margin-left:2em;
+  }
+  ol li {
+    list-style: decimal;
+    margin-left:2em;
+  }
+}
+input {
+  @include box-sizing(border-box);
+  display: block;
+  width: 100%;
+  padding: 6px;
+  appearance: normal;
+  border: 1px solid #999;
+
+  &[type=submit] {
+    border-radius: 5px;
+    background: linear-gradient(color-stops(#fff, #f0f0f0));
+  }
+  &[type=checkbox],
+  &[type=radio] {
+    display: inline;
+    width: auto;
+  }
+}
+button,
+select {
+  @include box-sizing(border-box);
+  padding: 6px;
+  border: 1px solid #999;
+  border-radius: 5px;
+}
+
+textarea {
+  @include box-sizing(border-box);
+  display: block;
+  width:100%;
+}
+
+b {
+  font-weight: bold;
+}
+
+b.require {
+  color:#FCC;
+  background:#F33;
+  padding:3px;
+}
+
+dt {
+  font-weight: bold;
+  padding:3px;
+  background:#f0f0f0;
+  margin-bottom:10px;
+}
+dd {
+  margin-bottom:10px;
+}
+header,
+footer {
+  background: #f0fff0;
+  border:#6f6 dashed 1px;
+  padding:2px;
+}
+.error {
+  .message {
+    @include box-sizing(border-box);
+    padding:5px;
+    border:2px solid #f00;
+    color:#f00;
+  }
+  input {
+    background: #FFcccc;
+  }
+}
+
+/***
+* Function
+***/
+
+input[type=checkbox].statement {
+  position:absolute;
+  top:-10000px;
+}
+
+// グローバルナビ
+body {
+  padding-bottom:100px;
+}
+.global-nav {
+  position: relative;
+
+  .enable-nav & {
+    display: block;
+  }
+
+  .sub-nav {
+    display: none;
+  }
+
+  .close {
+    display: block;
+  }
+  .open {
+    display: none;
+  }
+
+  &.open {
+    .sub-nav {
+      display: block;
+    }
+    .close {
+      display: none;
+    }
+    .open {
+      display: block;
+    }
+
+  }
+  .fixed-menu {
+    position:fixed;
+    bottom:0;
+    left:0;
+    z-index: 1;
+    background:#FFF;
+    margin:0;
+    box-sizing: border-box;
+    width:320px;
+
+    body.tablet & {
+      width: 786px;
+    }
+    body.pc & {
+      width: 960px;
+    }
+  }
+}
+
+// ログインステータス
+body.loggedin {
+  .loggedin {
+    display: block;
+  }
+  .no-login {
+    display: none;
+  }
+}
+
+body .loggedin {
+  display: none;
+}
+
+// パーシャル用のデータ要素
+* [data-parcial] data {
+  display: none;
+}
+
+// パンくず
+.breadcrumb-list {
+  li {
+    display: inline-block;
+  }
+
+  a {
+    margin-right:0.5em;
+  }
+  a:after {
+    background: transparent;
+    color: #999;
+    content: '>';
+    right: -1em;
+    font-size:14px;
+    top:6px;
+  }
+  li:last-child a:after {
+    content: "";
+  }
+}
