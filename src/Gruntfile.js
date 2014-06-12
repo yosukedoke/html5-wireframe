@@ -41,7 +41,7 @@ module.exports = function(grunt) {
         expand: true,
         cwd: 'tmp-css/',
         src: ['**/*.css', '**/!*.min.css'],
-        dest: '../dist/css/'
+        dest: '../dest/css/'
       }
     },
     uglify: {
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'js',
           src: '**/*.js',
-          dest: '../dist/js'
+          dest: 'tmp-js'
         }]
       }
     },
@@ -62,7 +62,11 @@ module.exports = function(grunt) {
       options: {
 
       },
-      nothing: {}
+      js: {
+        src: [ 'tmp-js/Cisolasse.js', 'tmp-js/Partial.js', 'tmp-js/Wireframe.js'],
+        dest : '../dest/js/HTML5-Wireframe.min.js',
+        nonull: true,
+      }
     },
     clean: {
       options: {
@@ -71,7 +75,6 @@ module.exports = function(grunt) {
       nothing: {}
     },
 
-    // watch or esteWatch好きな方を使ってください
     watch: {
       stylesheets: {
         files: 'scss/**/*.scss',
