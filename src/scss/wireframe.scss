@@ -29,22 +29,27 @@ body {
   font-family: 'メイリオ' sans-serif;
   font-size: 13px;
 
-  .outline-screen {
+  &.sp > .outline-screen {
+    width: 320px;
+  }
+  &.pc > .outline-screen {
+    width: 960px;
+  }
+  &.tablet > .outline-screen {
+    width: 786px;
+  }
+
+  & > .outline-screen {
     @include box-sizing(border-box);
     height: 100%;
     padding:$margin-global;
     background: white;
   }
+}
 
-  width: 320px;
-
-  &.pc .outline-screen {
-    width: 960px;
-  }
-  &.tablet .outline-screen {
-    width: 786px;
-  }
-
+// パーシャル用のデータ要素
+* [data-parcial] data {
+  display: none;
 }
 
 @mixin use-tooltip {
@@ -81,21 +86,6 @@ article {
   &:after {
     background: $color-article;
   }
-
-  ul.tags li {
-    background: #669;
-    color: #FFF;
-    padding: 1px 2px;
-    font-size: 6px;
-
-    &.category {
-      background: #966;
-    }
-  }
-
-  time {
-    font-size:10px;
-  }
 }
 
 section {
@@ -113,6 +103,7 @@ aside {
     background: $color-aside;
   }
 }
+
 nav {
   border-color: $color-nav;
 
@@ -196,28 +187,24 @@ input {
 }
 button,
 select {
-  @include box-sizing(border-box);
   padding: 6px;
   border: 1px solid #999;
   border-radius: 5px;
-}
-
-textarea {
   @include box-sizing(border-box);
+}
+textarea {
   display: block;
   width:100%;
+  @include box-sizing(border-box);
 }
-
 b {
   font-weight: bold;
 }
-
 b.require {
   color:#FCC;
   background:#F33;
   padding:3px;
 }
-
 dt {
   font-weight: bold;
   padding:3px;
@@ -232,118 +219,4 @@ footer {
   background: #f0fff0;
   border:#6f6 dashed 1px;
   padding:2px;
-}
-.error {
-  .message {
-    @include box-sizing(border-box);
-    padding:5px;
-    border:2px solid #f00;
-    color:#f00;
-  }
-  input {
-    background: #FFcccc;
-  }
-}
-
-/***
-* Function
-***/
-
-input[type=checkbox].statement {
-  position:absolute;
-  top:-10000px;
-}
-
-// グローバルナビ
-body {
-  padding-bottom:100px;
-}
-.global-nav {
-  position: relative;
-
-  .enable-nav & {
-    display: block;
-  }
-
-  .sub-nav {
-    display: none;
-  }
-
-  .close {
-    display: block;
-  }
-  .open {
-    display: none;
-  }
-
-  &.open {
-    .sub-nav {
-      display: block;
-    }
-    .close {
-      display: none;
-    }
-    .open {
-      display: block;
-    }
-
-  }
-  .fixed-menu {
-    position:fixed;
-    bottom:0;
-    left:0;
-    z-index: 1;
-    background:#FFF;
-    margin:0;
-    box-sizing: border-box;
-    width:320px;
-
-    body.tablet & {
-      width: 786px;
-    }
-    body.pc & {
-      width: 960px;
-    }
-  }
-}
-
-// ログインステータス
-body.loggedin {
-  .loggedin {
-    display: block;
-  }
-  .no-login {
-    display: none;
-  }
-}
-
-body .loggedin {
-  display: none;
-}
-
-// パーシャル用のデータ要素
-* [data-parcial] data {
-  display: none;
-}
-
-// パンくず
-.breadcrumb-list {
-  li {
-    display: inline-block;
-  }
-
-  a {
-    margin-right:0.5em;
-  }
-  a:after {
-    background: transparent;
-    color: #999;
-    content: '>';
-    right: -1em;
-    font-size:14px;
-    top:6px;
-  }
-  li:last-child a:after {
-    content: "";
-  }
 }

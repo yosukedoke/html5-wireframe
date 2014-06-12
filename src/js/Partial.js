@@ -3,36 +3,36 @@
 
   var defaults = {
     ATTR_NAME : 'data-parcial',
-    DIR       : '/_partials/',
     CONTENTS  : ' main > *'
   };
-  function Parcial($target, options) {
+  function Partial($target, options) {
     this.options = options || {};
 
     this.$target = $target;
   }
   function nop() {/* do nothing */}
 
-  Parcial.defaults = defaults;
-  Parcial.prototype = {
+  Partial.defaults = defaults;
+  Partial.prototype = {
     $target: null,
     load : function (callback) {
       callback = callback || nop;
-      var filename = this.$target.attr(defaults.ATTR_NAME);
+      var filepath = this.$target.attr(defaults.ATTR_NAME);
       var data;
 
-      if(filename.match(/\.ejs$/) && !!EJS) {
+      if(filepath.match(/\.ejs$/) && !!EJS) {
         try{
           data = JSON.parse(this.$target.text()) || {};
         }
         catch(error) {
           data = {};
         }
-        this.$target.html(new EJS({url: defaults.DIR + filename}).render(data));
+
+        this.$target.html(new EJS({url:filepath}).render(data));
         callback();
       }
       else {
-        this.$target.load(defaults.DIR + filename + defaults.CONTENTS, function() {
+        this.$target.load(filepath + defaults.CONTENTS, function() {
           callback();
         });
       }
@@ -59,11 +59,11 @@
       }
     }
     $scope.each(function() {
-      new Parcial($(this)).load(complete);
+      new Partial($(this)).load(complete);
     });
   }
 
-  Parcial.build = build;
-  window.Parcial = Parcial;
+  Partial.build = build;
+  window.Partial = Partial;
 
 })(this, jQuery, EJS);

@@ -41,7 +41,7 @@ module.exports = function(grunt) {
         expand: true,
         cwd: 'tmp-css/',
         src: ['**/*.css', '**/!*.min.css'],
-        dest: '../public/css/'
+        dest: '../dist/css/'
       }
     },
     uglify: {
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'js',
           src: '**/*.js',
-          dest: '../public/js'
+          dest: '../dist/js'
         }]
       }
     },
@@ -81,20 +81,6 @@ module.exports = function(grunt) {
         files: 'js/**/*.js',
         tasks:['default']
       }
-    },
-
-// 何かうまく動かないので封印
-//    esteWatch: {
-//      options: {
-//        dirs: ['js/**/*.js', 'scss/**/*.scss']
-//      },
-//      '*': function(filepath) { return 'default' }
-//    },
-
-    growl: {
-      finish: {
-        title: '<%= pkg.name %> finished to build.'
-      }
     }
   });
 
@@ -106,8 +92,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-//  grunt.loadNpmTasks('grunt-este-watch');
-  grunt.loadNpmTasks('grunt-growl');
 
-  grunt.registerTask('default', ['jshint', 'compass', 'csslint', 'cssmin', 'uglify', 'concat', 'clean', 'growl']);
+  grunt.registerTask('default', ['jshint', 'compass', 'csslint', 'cssmin', 'uglify', 'concat', 'clean']);
 };
