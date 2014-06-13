@@ -92,6 +92,8 @@ Wireframe.QueryActions.parse(queryString);
 Wireframe.QueryActions.add(name, func, options);
 ```
 
+- options.defaultValue
+
 ```
 Wireframe.QueryActions.doAction(name, value);
 ```
@@ -99,9 +101,6 @@ Wireframe.QueryActions.doAction(name, value);
 ```
 Wireframe.QueryActions.attachQuery(object);
 ```
-
-- options.defaultValue
-
 
 ### Wireframe.HashActions
 
