@@ -37,7 +37,14 @@
   window.Cisolasse = {
     lang: lang,
     defaults: defaults,
-    setJSON : function (obj, langType) {
+    setJSON : function (jsonString, langType) {
+      try {
+        this.setJSON(JSON.parse(jsonString), langType);
+      }
+      catch(error) {
+      }
+    },
+    setObject : function (obj, langType) {
       cisolasse = parse(obj, (langType || lang.JA));
     },
     load : function (url, options, callbacks) {
@@ -62,7 +69,7 @@
       var self = this;
       $.getJSON(url).done(function (obj) {
         isLoading = false;
-        self.setJSON(obj);
+        self.setObject(obj);
         callbacks.complete();
         autoAttach.apply(self, [options.$target]);
       }).error(function () {
