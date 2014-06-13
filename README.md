@@ -37,7 +37,6 @@ Wireframe.Partial.build($('body'), {
 ↑の一連の作業をふくめた初期化
 
 ```
-/* @require jQuery */
 Wireframe.initWithPartials($('body'), {
     complete: function() {
       Wireframe.Cisolasse.load('_data/cisolasse.json', {$target : $body, autoAttach: true});
