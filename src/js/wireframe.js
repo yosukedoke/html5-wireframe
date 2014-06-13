@@ -99,7 +99,7 @@
           self.init();
           complete.apply(null, arguments);
         };
-        Partial.build($body, options);
+        Partial.build($target, options);
       }
     };
   })();
