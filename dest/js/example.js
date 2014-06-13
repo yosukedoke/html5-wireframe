@@ -37,10 +37,12 @@
     });
     */
 
-    Wireframe.Partial.build($body, {
-      complete: function() {
-        Wireframe.init();
+    /*
+    Wireframe.init();
+    */
 
+    Wireframe.initWithPartials($body,  {
+      complete: function() {
         Wireframe.Cisolasse.load('_data/cisolasse.json', {$target : $body, autoAttach: true});
       }
     });

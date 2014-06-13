@@ -89,6 +89,17 @@
         $('article, section, nav, aside, h1, h2, h3, h4, h5, h6').each(function(i, el) {
           $(el).attr('data-name', el.tagName.toLocaleLowerCase());
         });
+      },
+      initWithPartials : function($target, options) {
+        options = options || {};
+
+        var self = this;
+        var complete = options.complete || function () {};
+        options.complete = function () {
+          self.init();
+          complete.apply(null, arguments);
+        };
+        Partial.build($body, options);
       }
     };
   })();
