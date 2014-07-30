@@ -95,10 +95,6 @@
     QueryActions: QueryActions,
     HashActions : HashActions,
     init : function() {
-      var queries = QueryActions.parse(location.search.substr(1));
-      QueryActions.attachQuery(queries);
-      HashActions.init();
-
       $('article, section, nav, aside, h1, h2, h3, h4, h5, h6').each(function(i, el) {
         $(el).attr('data-name', el.tagName.toLocaleLowerCase());
       });

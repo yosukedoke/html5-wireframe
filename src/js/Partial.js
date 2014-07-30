@@ -13,7 +13,8 @@
   'use strict';
 
   var defaults = {
-    ATTR_NAME : 'data-parcial',
+    FILTER_ATTR_NAME : 'data-filter',
+    SELECTOR_ATTR_NAME : 'data-parcial',
     CONTENTS  : ' main > *'
   };
   function Partial($target, options) {
@@ -28,7 +29,7 @@
     $target: null,
     load : function (callback) {
       callback = callback || nop;
-      var filepath = this.$target.attr(defaults.ATTR_NAME);
+      var filepath = this.$target.attr(defaults.SELECTOR_ATTR_NAME);
       var data;
 
       if(filepath.match(/\.ejs$/) && !!EJS) {
@@ -50,12 +51,25 @@
     }
   };
 
-  function build($target, callbacks) {
-    callbacks = callbacks || {};
-    if(!('progress' in callbacks)) { callbacks.progress = nop; }
-    if(!('complete' in callbacks)) { callbacks.complete = nop; }
+  // TODO:セレクターの構築のところをリファクタリング
+  function ignoreElements($target, ignores) {
+    $.each(ignores, function(i, value) {
+      $target.find('*[' + defaults.FILTER_ATTR_NAME + '][' + defaults.FILTER_ATTR_NAME + '!=' + value + ']').remove();
+    });
 
-    var $scope = $target.find('*[' + defaults.ATTR_NAME + ']');
+    $target.find('*[' + defaults.FILTER_ATTR_NAME + ']').removeAttr(defaults.FILTER_ATTR_NAME);
+
+    return $target;
+  }
+
+  function build($target, options) {
+    var callbacks = {};
+    options = options || {};
+
+    callbacks.progress = 'progress' in options ? options.progress : nop;
+    callbacks.complete = 'complete' in options ? options.complete : nop;
+
+    var $scope = $target.find('*[' + defaults.SELECTOR_ATTR_NAME + ']');
 
     var count = 0;
     var total = $scope.length;
@@ -63,10 +77,10 @@
     function complete() {
       count++;
       if(count === total) {
-        callbacks.complete();
+        options.complete();
       }
       else {
-        callbacks.progress(count, total);
+        options.progress(count, total);
       }
     }
     $scope.each(function() {
