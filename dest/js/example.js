@@ -37,9 +37,17 @@
     });
     */
 
+    var queries = Wireframe.QueryActions.parse(location.search.substr(1));
+    Wireframe.QueryActions.attachQuery(queries);
+    Wireframe.HashActions.init();
+
     /*
-    Wireframe.init();
+    $body = Wireframe.Partial.ignore($body, ['somekeywords'])
     */
+
+    /*
+     Wireframe.init();
+     */
 
     Wireframe.initWithPartials($body,  {
       complete: function() {

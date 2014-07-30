@@ -13,7 +13,7 @@
   'use strict';
 
   var defaults = {
-    ATTR_NAME : 'data-parcial',
+    SELECTOR_ATTR_NAME : 'data-parcial',
     CONTENTS  : ' main > *'
   };
   function Partial($target, options) {
@@ -28,7 +28,7 @@
     $target: null,
     load : function (callback) {
       callback = callback || nop;
-      var filepath = this.$target.attr(defaults.ATTR_NAME);
+      var filepath = this.$target.attr(defaults.SELECTOR_ATTR_NAME);
       var data;
 
       if(filepath.match(/\.ejs$/) && !!EJS) {
@@ -55,7 +55,7 @@
     if(!('progress' in callbacks)) { callbacks.progress = nop; }
     if(!('complete' in callbacks)) { callbacks.complete = nop; }
 
-    var $scope = $target.find('*[' + defaults.ATTR_NAME + ']');
+    var $scope = $target.find('*[' + defaults.SELECTOR_ATTR_NAME + ']');
 
     var count = 0;
     var total = $scope.length;
