@@ -62,10 +62,12 @@
     return $target;
   }
 
-  function build($target, callbacks) {
-    callbacks = callbacks || {};
-    if(!('progress' in callbacks)) { callbacks.progress = nop; }
-    if(!('complete' in callbacks)) { callbacks.complete = nop; }
+  function build($target, options) {
+    var callbacks = {};
+    options = options || {};
+
+    callbacks.progress = 'progress' in options ? options.progress : nop;
+    callbacks.complete = 'complete' in options ? options.complete : nop;
 
     var $scope = $target.find('*[' + defaults.SELECTOR_ATTR_NAME + ']');
 
@@ -75,10 +77,10 @@
     function complete() {
       count++;
       if(count === total) {
-        callbacks.complete();
+        options.complete();
       }
       else {
-        callbacks.progress(count, total);
+        options.progress(count, total);
       }
     }
     $scope.each(function() {
