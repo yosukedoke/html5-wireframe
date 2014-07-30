@@ -13,6 +13,7 @@
   'use strict';
 
   var defaults = {
+    FILTER_ATTR_NAME : 'data-filter',
     SELECTOR_ATTR_NAME : 'data-parcial',
     CONTENTS  : ' main > *'
   };
@@ -49,6 +50,17 @@
       }
     }
   };
+
+  // TODO:セレクターの構築のところをリファクタリング
+  function ignoreElements($target, ignores) {
+    $.each(ignores, function(i, value) {
+      $target.find('*[' + defaults.FILTER_ATTR_NAME + '][' + defaults.FILTER_ATTR_NAME + '!=' + value + ']').remove();
+    });
+
+    $target.find('*[' + defaults.FILTER_ATTR_NAME + ']').removeAttr(defaults.FILTER_ATTR_NAME);
+
+    return $target;
+  }
 
   function build($target, callbacks) {
     callbacks = callbacks || {};
