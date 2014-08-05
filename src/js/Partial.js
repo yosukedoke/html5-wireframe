@@ -74,6 +74,7 @@
     });
   }
 
+  Partial.ignore = ignoreElements;
   Partial.build = build;
   return Partial;
 
