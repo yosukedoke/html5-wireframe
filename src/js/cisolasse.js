@@ -37,7 +37,7 @@
   var cisolasse,
       isLoading = false,
       defaults = {
-        ATTR_NAME : 'data-variable-name'
+        SELECTOR_ATTR_NAME : 'data-variable-name'
       },
       lang = {
         EN: 'en',
@@ -92,7 +92,7 @@
 
       if(!cisolasse) { return; }
 
-      var attrName = (options.attrName || defaults.ATTR_NAME);
+      var attrName = (options.attrName || defaults.SELECTOR_ATTR_NAME);
       $target = ($target || $(document)).find('*[' + attrName + ']');
 
       $target.each(function () {

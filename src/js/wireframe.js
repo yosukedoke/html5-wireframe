@@ -1,13 +1,13 @@
 (function(root, factory) {
-  if (typeof define === 'function' && define.amd) {
-    define([ 'jquery', './Partial', './Cisolasse'], function($, Partial, Cisolasse) {
-      root.Wireframe = factory(root, $, Partial, Cisolasse);
-    });
-  } else if (typeof exports !== 'undefined') {
+  if (typeof exports !== 'undefined') {
     var $ = require('jquery');
     var Partial = require('./Partial');
     var Cisolasse = require('./Cisolasse');
-    factory(root, $, Partial, Cisolasse);
+    module.exports = factory(root, $, Partial, Cisolasse);
+  } else if (typeof define === 'function' && define.amd) {
+    define([ 'jquery', './Partial', './Cisolasse'], function($, Partial, Cisolasse) {
+      root.Wireframe = factory(root, $, Partial, Cisolasse);
+    });
   } else {
     root.Wireframe = factory(root, (root.jQuery || root.Zepto || root.ender || root.$), root.Partial, root.Cisolasse);
   }
@@ -95,10 +95,6 @@
     QueryActions: QueryActions,
     HashActions : HashActions,
     init : function() {
-      var queries = QueryActions.parse(location.search.substr(1));
-      QueryActions.attachQuery(queries);
-      HashActions.init();
-
       $('article, section, nav, aside, h1, h2, h3, h4, h5, h6').each(function(i, el) {
         $(el).attr('data-name', el.tagName.toLocaleLowerCase());
       });
