@@ -14,7 +14,7 @@
 
   var defaults = {
     FILTER_ATTR_NAME : 'data-filter',
-    SELECTOR_ATTR_NAME : 'data-parcial',
+    SELECTOR_ATTR_NAME : 'data-partial',
     CONTENTS  : ' main > *'
   };
   function Partial($target, options) {
